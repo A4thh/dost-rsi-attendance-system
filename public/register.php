@@ -55,20 +55,7 @@
 </head>
 
 <body class="antialiased bg-white text-[#0b1214] font-serif">
- <header class="font-inter w-full border-b border-[#7c868a]/20 bg-white">
-  <div
-   class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
-   <a href="./index.html" class="flex items-center gap-2 text-[#002735]">
-    <img src="../public/assets/icons/dost-logo.svg" class="w-6 h-6" alt="">
-    <span class="font-medium tracking-wide text-sm uppercase">DOST · 8th RSI Forum</span>
-   </a>
-   <nav
-    class="flex items-center gap-6 text-xs uppercase tracking-widest text-[#35393a]">
-    <a href="index.php" class="hover:text-[#00adec] transition-colors">About</a>
-    <a href="#" class="text-[#00adec]" aria-current="page">Register</a>
-   </nav>
-  </div>
- </header>
+ <?php include '../public/includes/header.php' ?>
 
  <section
   class="relative w-full bg-cover bg-center bg-no-repeat"
@@ -87,14 +74,14 @@
    class="relative max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
    <div class="lg:col-span-8">
     <p
-     class="font-inter text-xs tracking-[0.3em] text-[#00adec] uppercase mb-4">
+     class="font-inter text-xs tracking-[0.3em] text-[#a1e5fe] uppercase mb-4">
      Registration Portal
     </p>
     <h1
      id="page-heading"
      class="font-inter text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-[#ebf5f8] leading-[1.05]">
-     8th Regional<br />
-     Science and<br />
+     8th Research,<br />
+     Statistics, and<br />
      Innovation Forum
     </h1>
     <p
@@ -110,21 +97,21 @@
       <dt class="text-[#00adec] mb-1">Dates</dt>
       <dd
        class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
-       Oct 12 – 14, 2026<br />08:00 AM – 05:00 PM
+       October 21, 2026<br />08:00 AM – 05:00 PM
       </dd>
      </div>
      <div>
       <dt class="text-[#00adec] mb-1">Venue</dt>
       <dd
        class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
-       Quezon Convention Center<br />Lucena City, Quezon
+       Batangas State University<br />Alangilan, Batangas City
       </dd>
      </div>
      <div>
       <dt class="text-[#00adec] mb-1">Format</dt>
       <dd
        class="font-serif text-sm text-[#ebf5f8] normal-case tracking-normal">
-       Hybrid · In-Person &amp; Online
+       In-Person
       </dd>
      </div>
     </dl>
@@ -185,12 +172,12 @@
        Data Privacy<br />Consent
       </h2>
       <p class="font-serif text-sm text-[#35393a] leading-relaxed mb-4">
-       DOST CALABARZON collects and processes the personal information you
+       REGIONAL DEVELOPMENT COUNCIL collects and processes the personal information you
        provide below solely for event registration, coordination, and reporting
        purposes, in accordance with the Data Privacy Act of 2012 (RA 10173).
       </p>
       <p class="font-serif text-xs text-[#7c868a] leading-relaxed italic mb-6">
-       Kinokolekta at pinoproseso ng DOST CALABARZON ang personal na
+       Kinokolekta at pinoproseso ng REGIONAL DEVELOPMENT COUNCIL ang personal na
        impormasyong ibibigay mo sa ibaba, para lamang sa layunin ng
        pagpaparehistro, koordinasyon, at pag-uulat ng mga kaganapan, alinsunod
        sa Data Privacy Act of 2012 (RA 10173).
@@ -463,7 +450,7 @@
           required
           class="sr-only peer" />
          <span
-          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Exhibitor</span>
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Presentor</span>
         </label>
         <label class="cursor-pointer">
          <input
@@ -473,7 +460,7 @@
           required
           class="sr-only peer" />
          <span
-          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Organizer / Facilitator</span>
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Event Staff / Moderator</span>
         </label>
         <label class="cursor-pointer">
          <input
@@ -483,7 +470,7 @@
           required
           class="sr-only peer" />
          <span
-          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Participant / Walk-in</span>
+          class="font-inter block text-xs tracking-[0.15em] uppercase py-2.5 px-4 border border-[#7c868a]/30 text-[#35393a] peer-checked:bg-[#00adec] peer-checked:text-white peer-checked:border-[#00adec] peer-focus:ring-2 peer-focus:ring-[#00adec] peer-focus:ring-offset-2 transition-colors">Attendee</span>
         </label>
         <label class="cursor-pointer">
          <input
@@ -616,10 +603,8 @@
         </span>
         <span class="flex-1">
          <span
-          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">2026 Grand TKME Exhibit</span>
-         <span class="font-serif text-xs text-[#7c868a] block mt-1">Teknolohiya at Inobasyon, Kaagapay ng Micro Enterprises</span>
-         <span
-          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 12 · 08:00 AM · In-Person</span>
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Activity 1</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia repellendus aspernatur autem neque eos nihil fugit. Unde, architecto deserunt impedit error ea nisi ex sint odit, repudiandae iste sunt cupiditate.</span>
         </span>
        </label>
 
@@ -648,10 +633,8 @@
         </span>
         <span class="flex-1">
          <span
-          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">2026 S&amp;T Exhibit</span>
-         <span class="font-serif text-xs text-[#7c868a] block mt-1">Showcase of science and technology innovations</span>
-         <span
-          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 12 · 08:20 AM · In-Person</span>
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Activity 2</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quo provident saepe dignissimos veniam culpa ullam perspiciatis cum ipsum odio numquam, eum magni, eveniet amet asperiores quia nulla, voluptate qui.</span>
         </span>
        </label>
 
@@ -680,10 +663,8 @@
         </span>
         <span class="flex-1">
          <span
-          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Plenary Sessions</span>
-         <span class="font-serif text-xs text-[#7c868a] block mt-1">Keynote addresses from distinguished experts</span>
-         <span
-          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 13 · 09:00 AM · Main Hall</span>
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Activity 3</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, cupiditate autem? Nesciunt natus mollitia est voluptas consectetur quisquam eos possimus? Eum repellat deleniti quasi eligendi, cum a error odit inventore.</span>
         </span>
        </label>
 
@@ -712,10 +693,10 @@
         </span>
         <span class="flex-1">
          <span
-          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Innovation Pitch Competition</span>
-         <span class="font-serif text-xs text-[#7c868a] block mt-1">Competitive pitch sessions for innovative ideas</span>
-         <span
-          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 14 · 01:00 PM · Function Room A</span>
+          class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Activity 4</span>
+         <span class="font-serif text-xs text-[#7c868a] block mt-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum expedita repudiandae qui corporis molestiae quos adipisci quo iste aliquid saepe, consequatur, error deserunt dolores tempore, assumenda ratione ut neque sed.</span>
+         <!-- <span
+          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 14 · 01:00 PM · Function Room A</span> -->
         </span>
        </label>
       </div>
@@ -747,13 +728,7 @@
   </form>
  </main>
 
- <footer class="w-full border-t border-[#7c868a]/20 bg-[#0b1214]">
-  <div
-   class="max-w-7xl mx-auto px-4 md:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-inter text-[10px] tracking-[0.25em] text-[#7c868a] uppercase">
-   <span>DOST CALABARZON</span>
-   <span>8th RSI Forum · 2026</span>
-  </div>
- </footer>
+ <?php include '../public/includes/footer.php' ?>
 
  <div
   id="signatureModal"

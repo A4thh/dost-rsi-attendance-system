@@ -623,6 +623,9 @@
   .resize {
     resize: both;
   }
+  .list-\[circle\] {
+    list-style-type: circle;
+  }
   .list-disc {
     list-style-type: disc;
   }
@@ -634,9 +637,6 @@
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1239,6 +1239,9 @@
   .text-\[\#35393a\] {
     color: #35393a;
   }
+  .text-\[\#a1e5fe\] {
+    color: #a1e5fe;
+  }
   .text-\[\#ebf5f8\] {
     color: #ebf5f8;
   }
@@ -1345,17 +1348,8 @@
   .peer-checked\:border-\[\#00adec\]:is(:where(.peer):checked ~ *) {
     border-color: #00adec;
   }
-  .peer-checked\:border-\[\#002735\]:is(:where(.peer):checked ~ *) {
-    border-color: #002735;
-  }
   .peer-checked\:bg-\[\#00adec\]:is(:where(.peer):checked ~ *) {
     background-color: #00adec;
-  }
-  .peer-checked\:bg-\[\#002735\]:is(:where(.peer):checked ~ *) {
-    background-color: #002735;
-  }
-  .peer-checked\:text-\[\#ebf5f8\]:is(:where(.peer):checked ~ *) {
-    color: #ebf5f8;
   }
   .peer-checked\:text-white:is(:where(.peer):checked ~ *) {
     color: var(--color-white);
@@ -1525,9 +1519,6 @@
     .sm\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    .sm\:grid-cols-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
     .sm\:flex-row {
       flex-direction: row;
     }
@@ -1550,9 +1541,6 @@
     }
     .md\:col-span-6 {
       grid-column: span 6 / span 6;
-    }
-    .md\:col-span-12 {
-      grid-column: span 12 / span 12;
     }
     .md\:block {
       display: block;

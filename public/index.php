@@ -29,20 +29,7 @@
 </head>
 
 <body>
- <header class="font-inter w-full border-b border-[#7c868a]/20 bg-white">
-  <div
-   class="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
-   <a href="./index.html" class="flex items-center gap-2 text-[#002735]">
-    <img src="../public/assets/icons/dost-logo.svg" class="w-6 h-6" alt="">
-    <span class="font-medium tracking-wide text-sm uppercase">DOST · 8th RSI Forum</span>
-   </a>
-   <nav
-    class="flex items-center gap-6 text-xs uppercase tracking-widest text-[#35393a]">
-    <a href="index.php" class="text-[#00adec] transition-colors">About</a>
-    <a href="register.php" class="hover:text-[#00adec]" aria-current="page">Register</a>
-   </nav>
-  </div>
- </header>
+ <?php include '../public/includes/header.php' ?>
 
  <section
   class="relative min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -88,7 +75,7 @@
     <h1
      class="font-inter text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#002735] max-w-4xl leading-none"
      style="text-shadow: 0 1px 4px rgba(235, 245, 248, 0.6)">
-     8th Regional Science and Innovation Forum
+     8th Research, Statistics, and Innovation Forum
     </h1>
 
     <div
@@ -108,7 +95,7 @@
      </svg>
 
      <span class="font-inter">
-      Oct 12, 2026, 08:00 AM – Oct 14, 2026, 05:00 PM
+      Oct 21, 2026, 08:00 AM – 05:00 PM
      </span>
     </div>
 
@@ -129,7 +116,7 @@
      </svg>
 
      <span class="font-inter w-fit">
-      Quezon · Quezon Convention Center, Lucena City, Quezon
+      Batangas State University | Alangilan, Batangas City
      </span>
     </div>
     <!-- <a
@@ -216,45 +203,33 @@
       </div>
 
       <p class="font-serif text-[15px] text-[#35393a] leading-relaxed mb-5">
-       The 8th Research, Statistics, and Innovation Forum is a premier
-       gathering organized by the Department of Science and Technology (DOST),
-       bringing together researchers, statisticians, data scientists, and
-       innovators from across the Philippines. This three-day forum serves as a
-       national platform for the exchange of ideas, presentation of
-       cutting-edge research, and discussion of emerging trends in statistics
-       and innovation-driven development.
+       The <b>8th CALABARZON Research, Statistics, and Innovation (RSI) Forum</b>—themed <b>“Fostering a Resilient Tomorrow: Mobilizing Data and Digital Innovation for Sustainable Development Goal Progress, Food, Energy, and Tourism”</b>—serves as a platform for showcasing research and technological advancements. By bringing together students and professionals, the forum aims to drive regional development through collaborative knowledge sharing.
       </p>
       <p class="font-serif text-[15px] text-[#35393a] leading-relaxed mb-6">
-       The event features a comprehensive program designed to foster
-       interdisciplinary collaboration and capacity-building among
-       participants. It highlights the critical role of research and statistics
-       in shaping evidence-based policies and sustainable solutions for
-       national development.
+       This event is spearheaded by the <b>CALABARZON Regional Development Council (RDC)</b> through its <b>Regional Research, Development, and Innovation Committee (RRDIC)</b>, in close collaboration with key regional partner agencies.
       </p>
 
       <div class="font-serif text-[15px] text-[#35393a]">
        <span class="font-inter font-medium text-[#002735] block mb-2">Objectives:</span>
        <ul
         class="list-disc pl-5 space-y-2 marker:text-[#005b7b] marker:text-sm">
-        <li>
-         Provide a platform for researchers and statisticians to present and
-         discuss their latest findings.
+        <li class="font-inter font-bold">
+         Cultivate a Research-Driven Environment
+         <ul class="list-[circle] pl-5">
+          <li class="font-normal font-serif">To promote and sustain a robust culture of research across the CALABARZON region.</li>
+         </ul>
         </li>
-        <li>
-         Promote collaboration between academic institutions, government
-         agencies, and industry partners.
+        <li class="font-inter font-bold">
+         Facilitate Knowledge Exchange
+         <ul class="list-[circle] pl-5">
+          <li class="font-normal font-serif">To provide a dedicated venue for student and professional researchers to present their significant findings to a broader audience.</li>
+         </ul>
         </li>
-        <li>
-         Showcase innovative solutions and statistical methodologies that
-         address real-world challenges.
-        </li>
-        <li>
-         Enhance the capacity of participants through workshops, plenary
-         sessions, and technical discussions.
-        </li>
-        <li>
-         Advocate the importance of data-driven decision-making in policy
-         formulation and program implementation.
+        <li class="font-inter font-bold">
+         Enhance Institutional Capacity
+         <ul class="list-[circle] pl-5">
+          <li class="font-normal font-serif">To strengthen the research, statistical, and innovation capabilities of academic institutions, Local Government Units (LGUs), and partner government agencies.</li>
+         </ul>
         </li>
        </ul>
       </div>
@@ -294,46 +269,35 @@
         <span
          class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">01</span>
         <div>
-         <span class="font-inter font-medium text-[#0b1214] block text-sm">Plenary Sessions</span>
-         <span class="text-[#35393a]">Keynote addresses from distinguished experts in research,
-          statistics, and innovation.</span>
+         <span class="font-inter font-medium text-[#0b1214] block text-sm">Activity 1</span>
+         <span class="text-[#35393a]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quaerat, sit quasi porro aliquam aperiam mollitia quo hic soluta eum. Eius, perferendis error distinctio assumenda debitis sapiente obcaecati necessitatibus officiis.</span>
         </div>
        </li>
        <li class="flex items-start gap-3">
         <span
          class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">02</span>
         <div>
-         <span class="font-inter font-medium text-[#0b1214] block text-sm">Parallel Presentations</span>
-         <span class="text-[#35393a]">Concurrent research paper presentations across multiple thematic
-          tracks.</span>
+         <span class="font-inter font-medium text-[#0b1214] block text-sm">Activity 2</span>
+         <span class="text-[#35393a]">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit ea earum quae dicta blanditiis error harum illo excepturi saepe, voluptate cupiditate quis nesciunt quos natus iste ab quidem molestias? Rem.</span>
         </div>
        </li>
        <li class="flex items-start gap-3">
         <span
          class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">03</span>
         <div>
-         <span class="font-inter font-medium text-[#0b1214] block text-sm">Poster Exhibitions</span>
-         <span class="text-[#35393a]">Visual displays of statistical studies and research posters.</span>
+         <span class="font-inter font-medium text-[#0b1214] block text-sm">Activity 3</span>
+         <span class="text-[#35393a]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error molestiae vitae assumenda, sint molestias perspiciatis at neque ea nesciunt debitis id numquam possimus veniam. Commodi aliquam mollitia quod! Accusamus, architecto.</span>
         </div>
        </li>
        <li class="flex items-start gap-3">
         <span
          class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">04</span>
         <div>
-         <span class="font-inter font-medium text-[#0b1214] block text-sm">Innovation Pitch</span>
-         <span class="text-[#35393a]">Competitive pitch sessions for innovative ideas and solutions.</span>
+         <span class="font-inter font-medium text-[#0b1214] block text-sm">Activity 4</span>
+         <span class="text-[#35393a]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet alias non nobis esse sapiente officia beatae explicabo illum illo, debitis velit harum sunt modi molestiae delectus aut. Porro, reprehenderit assumenda.</span>
         </div>
        </li>
-       <li class="flex items-start gap-3">
-        <span
-         class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">05</span>
-        <div>
-         <span class="font-inter font-medium text-[#0b1214] block text-sm">Panel Discussions</span>
-         <span class="text-[#35393a]">Roundtable discussions on emerging trends and policy
-          implications.</span>
-        </div>
-       </li>
-       <li class="flex items-start gap-3">
+       <!-- <li class="flex items-start gap-3">
         <span
          class="font-inter text-[#005b7b] text-xs mt-1 font-medium tracking-wider">06</span>
         <div>
@@ -341,7 +305,7 @@
          <span class="text-[#35393a]">Structured opportunities for professional connection and
           collaboration.</span>
         </div>
-       </li>
+       </li> -->
       </ul>
      </div>
     </div>
@@ -394,7 +358,7 @@
           stroke="currentColor"
           stroke-linecap="round" />
         </svg>
-        <span>Oct 12 – 14, 2026<br /><span
+        <span>Oct 21, 2026<br /><span
           class="text-[#7c868a] text-xs font-inter">08:00 AM – 05:00 PM</span></span>
        </div>
        <div class="flex items-start gap-3">
@@ -411,7 +375,7 @@
           stroke-linejoin="round" />
          <circle cx="12" cy="10" r="2.5" stroke="currentColor" />
         </svg>
-        <span>Quezon<br /><span class="text-[#7c868a] text-xs font-inter">Quezon Convention Center, Lucena City</span></span>
+        <span>Alangilan, Batangas City<br /><span class="text-[#7c868a] text-xs font-inter">Batangas State University</span></span>
        </div>
       </div>
 
@@ -445,13 +409,9 @@
    </div>
   </div>
  </main>
- <footer class="w-full border-t border-[#7c868a]/20 bg-[#0b1214]">
-  <div
-   class="max-w-7xl mx-auto px-4 md:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 font-inter text-[10px] tracking-[0.25em] text-[#7c868a] uppercase">
-   <span>DOST CALABARZON</span>
-   <span>8th RSI Forum · 2026</span>
-  </div>
- </footer>
+
+ <?php include '../public/includes/footer.php' ?>
+
  <script src="/src/js/main.js"></script>
 </body>
 
