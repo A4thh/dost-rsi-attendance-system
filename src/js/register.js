@@ -151,10 +151,12 @@
   continueBtn.querySelector("span").textContent = "Validating...";
 
   try {
-   const res = await fetch("../public/api/validate.php", {
+   // FIXED: relative path from /public/register.php → api/validate.php
+   const res = await fetch("api/validate.php", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(collectFormData()),
+    credentials: "same-origin",
    });
    const data = await res.json();
 
@@ -289,10 +291,12 @@
   confirmBtn.textContent = "Submitting...";
 
   try {
-   const res = await fetch("../public/api/register.php", {
+   // FIXED: relative path from /public/register.php → api/register.php
+   const res = await fetch("api/register.php", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(payload),
+    credentials: "same-origin",
    });
 
    const data = await res.json();
@@ -357,7 +361,7 @@
         </p>
         <button type="button" id="successClose"
           class="w-full bg-[#00adec] text-white font-inter font-medium text-[10px] tracking-[0.25em] uppercase py-3 px-4 border border-[#00adec] hover:bg-[#005b7b] hover:border-[#005b7b] transition-colors">
-          Close
+          Back to Dashboard
         </button>
       </div>
     `;
@@ -370,11 +374,11 @@
    e.preventDefault();
    e.stopPropagation();
 
-   // Remove success modal
    overlay.remove();
 
-   // Refresh the registration page
-   window.location.href = "register.php";
+   // FIXED: send user to dashboard after registration, so they see
+   // the unlocked Evaluation card.
+   window.location.href = "dashboard.php";
   });
  }
 

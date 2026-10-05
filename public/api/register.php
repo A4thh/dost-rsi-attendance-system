@@ -4,17 +4,35 @@ declare(strict_types=1);
 ob_start();
 require __DIR__ . '/config.php';
 
+session_set_cookie_params([
+ 'lifetime' => 0,
+ 'path'     => '/',
+ 'httponly' => true,
+ 'samesite' => 'Lax',
+ 'secure'   => !empty($_SERVER['HTTPS']),
+]);
+session_start();
+
+while (ob_get_level() > 0) ob_end_clean();
+header('Content-Type: application/json; charset=utf-8');
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  json_out(['ok' => false, 'error' => 'Method not allowed'], 405);
 }
 
+if (empty($_SESSION['attendee_id'])) {
+ json_out(['ok' => false, 'error' => 'Not authenticated.'], 401);
+}
+
+$attendeeId = (int)$_SESSION['attendee_id'];
+
 $in = json_in();
 
-// ── Whitelists (same as validate.php) ─────────────────────────
-$GENDERS = ['male', 'female', 'other'];
+// ── Whitelists ────────────────────────────────────────────────
+$GENDERS         = ['male', 'female', 'other'];
 $CLASSIFICATIONS = ['business', 'government', 'homemaker', 'media', 'others', 'private', 'student'];
-$VISITOR_TYPES = ['exhibitor', 'organizer', 'participant', 'speaker', 'volunteer'];
-$REGION_IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'];
+$VISITOR_TYPES   = ['exhibitor', 'organizer', 'participant', 'speaker', 'volunteer'];
+$REGION_IDS      = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'];
 
 $errors = [];
 
@@ -23,7 +41,7 @@ function field(array $in, string $key): string
  return trim((string)($in[$key] ?? ''));
 }
 
-// ── Re-validate all fields (never trust the frontend) ─────────
+// ── Validation ────────────────────────────────────────────────
 if (empty($in['privacyConsent'])) {
  $errors['privacyConsent'] = 'You must agree to the data privacy consent.';
 }
@@ -93,7 +111,7 @@ if (!in_array($region, $REGION_IDS, true)) {
 }
 
 // ── Signature validation ──────────────────────────────────────
-$signature = (string)($in['signature'] ?? '');
+$signature    = (string)($in['signature'] ?? '');
 $signatureBin = null;
 
 if ($signature === '') {
@@ -101,7 +119,7 @@ if ($signature === '') {
 } elseif (!preg_match('#^data:image/png;base64,#i', $signature)) {
  $errors['signature'] = 'Signature format is invalid.';
 } else {
- $b64 = substr($signature, strpos($signature, ',') + 1);
+ $b64          = substr($signature, strpos($signature, ',') + 1);
  $signatureBin = base64_decode($b64, true);
  if ($signatureBin === false || strlen($signatureBin) < 500) {
   $errors['signature'] = 'Signature appears empty.';
@@ -110,11 +128,11 @@ if ($signature === '') {
  }
 }
 
-// ── Duplicate email ───────────────────────────────────────────
+// ── Duplicate email (exclude self) ────────────────────────────
 if (!isset($errors['contactEmail']) && $email !== '') {
  try {
-  $stmt = db()->prepare('SELECT id FROM attendees WHERE email = ? LIMIT 1');
-  $stmt->execute([$email]);
+  $stmt = db()->prepare('SELECT id FROM attendees WHERE email = ? AND id <> ? LIMIT 1');
+  $stmt->execute([$email, $attendeeId]);
   if ($stmt->fetch()) {
    $errors['contactEmail'] = 'This email is already registered.';
   }
@@ -128,11 +146,20 @@ if (!empty($errors)) {
  json_out(['ok' => false, 'errors' => $errors], 422);
 }
 
-// ── Everything valid. Insert. ─────────────────────────────────
-$uuid  = uuid_v4();
-$token = token_hex(32); // 64-char hex string
+// ── Get the attendee's existing uuid ──────────────────────────
+$uuid = (string)($_SESSION['attendee_uuid'] ?? '');
+if ($uuid === '') {
+ $stmt = db()->prepare('SELECT uuid FROM attendees WHERE id = ? LIMIT 1');
+ $stmt->execute([$attendeeId]);
+ $uuid = (string)($stmt->fetchColumn() ?: '');
+}
+if ($uuid === '') {
+ json_out(['ok' => false, 'error' => 'Account not found.'], 404);
+}
 
-// Save signature PNG
+$token = token_hex(32);
+
+// ── Save signature PNG ────────────────────────────────────────
 $sigDir = SIGNATURE_DIR;
 if (!is_dir($sigDir)) {
  mkdir($sigDir, 0775, true);
@@ -143,16 +170,26 @@ if (file_put_contents($sigFile, $signatureBin) === false) {
 }
 $sigRelPath = 'signatures/' . $uuid . '.png';
 
-// Insert row
+// ── UPDATE the logged-in attendee's row (do NOT insert) ───────
 try {
  $stmt = db()->prepare(
-  'INSERT INTO attendees
-          (uuid, qr_token, first_name, middle_name, last_name, gender, age_range,
-           classification, email, visitor_type, affiliation, region, signature_path)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)'
+  'UPDATE attendees SET
+            qr_token       = ?,
+            first_name     = ?,
+            middle_name    = ?,
+            last_name      = ?,
+            gender         = ?,
+            age_range      = ?,
+            classification = ?,
+            email          = ?,
+            visitor_type   = ?,
+            affiliation    = ?,
+            region         = ?,
+            signature_path = ?,
+            is_registered  = 1
+         WHERE id = ?'
  );
  $stmt->execute([
-  $uuid,
   $token,
   $firstName,
   $middleName,
@@ -165,15 +202,15 @@ try {
   $affiliation,
   $region,
   $sigRelPath,
+  $attendeeId,
  ]);
 } catch (Throwable $e) {
- error_log('Insert failed: ' . $e->getMessage());
- // Clean up the orphan signature file
+ error_log('Registration update failed: ' . $e->getMessage());
  if (is_file($sigFile)) @unlink($sigFile);
  json_out(['ok' => false, 'error' => 'Could not save registration.'], 500);
 }
 
-// Build the response body first so we can send proper headers.
+// ── Respond (JSON) ────────────────────────────────────────────
 $response = json_encode([
  'ok'      => true,
  'uuid'    => $uuid,
@@ -185,20 +222,16 @@ header('Content-Type: application/json; charset=utf-8');
 header('Content-Length: ' . strlen($response));
 header('Connection: close');
 
-// Discard any buffered output that might have crept in, then send our JSON.
 while (ob_get_level() > 0) ob_end_clean();
 echo $response;
 
-// Try to close the connection to the browser NOW.
-// On PHP-FPM this truly finishes the HTTP response.
 if (function_exists('fastcgi_finish_request')) {
  fastcgi_finish_request();
 } else {
- // mod_php fallback: send everything and hope Apache closes.
  flush();
 }
 
-// From here on, whatever we do cannot affect the browser response.
+// ── Background: email the QR ──────────────────────────────────
 ignore_user_abort(true);
 set_time_limit(15);
 

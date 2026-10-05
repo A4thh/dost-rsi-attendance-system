@@ -1,3 +1,32 @@
+<?php
+session_set_cookie_params([
+ 'lifetime' => 0,
+ 'path'     => '/',
+ 'httponly' => true,
+ 'samesite' => 'Lax',
+ 'secure'   => !empty($_SERVER['HTTPS']),
+]);
+session_start();
+
+if (empty($_SESSION['attendee_id'])) {
+ header('Location: auth.php');
+ exit;
+}
+
+require __DIR__ . '/api/config.php';
+
+$stmt = db()->prepare(
+ 'SELECT username, first_name, middle_name, last_name, email
+     FROM attendees WHERE id = ? LIMIT 1'
+);
+$stmt->execute([$_SESSION['attendee_id']]);
+$me = $stmt->fetch() ?: [];
+
+$lockedFirst  = htmlspecialchars((string)($me['first_name']  ?? ''));
+$lockedMiddle = htmlspecialchars((string)($me['middle_name'] ?? ''));
+$lockedLast   = htmlspecialchars((string)($me['last_name']   ?? ''));
+$lockedEmail  = htmlspecialchars((string)($me['email']       ?? ''));
+?>
 <!doctype html>
 <html lang="en">
 
@@ -51,11 +80,16 @@
   .error-msg.visible {
    display: block;
   }
+
+  .locked-input {
+   color: #7c868a !important;
+   cursor: not-allowed !important;
+  }
  </style>
 </head>
 
 <body class="antialiased bg-white text-[#0b1214] font-serif">
- <?php include '../public/includes/header.php' ?>
+ <?php include __DIR__ . '/includes/header.php'; ?>
 
  <section
   class="relative w-full bg-cover bg-center bg-no-repeat"
@@ -67,7 +101,7 @@
       rgba(0, 39, 53, 0.72) 55%,
       #002735 100%
      ),
-     url(&quot;../public/assets/images/registration-bg.png&quot;);
+     url(&quot;./assets/images/registration-bg.png&quot;);
    "
   aria-labelledby="page-heading">
   <div
@@ -259,8 +293,13 @@
          name="firstName"
          required
          aria-required="true"
-         autocomplete="given-name"
-         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+         readonly
+         aria-readonly="true"
+         value="<?= $lockedFirst ?>"
+         class="locked-input w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#7c868a]/40 focus:ring-0 transition-colors" />
+        <p class="font-serif text-[10px] text-[#7c868a] italic mt-1">
+         Locked — edit in <a href="profile.php" class="underline underline-offset-2 hover:text-[#00adec]">Profile</a>.
+        </p>
         <p class="error-msg" data-error-for="firstName"></p>
        </div>
        <div class="md:col-span-4">
@@ -273,8 +312,13 @@
          type="text"
          id="middleName"
          name="middleName"
-         autocomplete="additional-name"
-         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+         readonly
+         aria-readonly="true"
+         value="<?= $lockedMiddle ?>"
+         class="locked-input w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#7c868a]/40 focus:ring-0 transition-colors" />
+        <p class="font-serif text-[10px] text-[#7c868a] italic mt-1">
+         Locked — edit in <a href="profile.php" class="underline underline-offset-2 hover:text-[#00adec]">Profile</a>.
+        </p>
         <p class="error-msg" data-error-for="middleName"></p>
        </div>
        <div class="md:col-span-4">
@@ -289,8 +333,13 @@
          name="lastName"
          required
          aria-required="true"
-         autocomplete="family-name"
-         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
+         readonly
+         aria-readonly="true"
+         value="<?= $lockedLast ?>"
+         class="locked-input w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base focus:outline-none focus:border-[#7c868a]/40 focus:ring-0 transition-colors" />
+        <p class="font-serif text-[10px] text-[#7c868a] italic mt-1">
+         Locked — edit in <a href="profile.php" class="underline underline-offset-2 hover:text-[#00adec]">Profile</a>.
+        </p>
         <p class="error-msg" data-error-for="lastName"></p>
        </div>
 
@@ -405,6 +454,7 @@
         required
         aria-required="true"
         autocomplete="email"
+        value="<?= $lockedEmail ?>"
         placeholder="juan@example.com"
         class="w-full bg-transparent border-0 border-b border-[#7c868a]/40 px-0 py-2 font-serif text-base text-[#0b1214] placeholder:text-[#7c868a]/60 focus:outline-none focus:border-[#00adec] focus:ring-0 transition-colors" />
        <p class="error-msg" data-error-for="contactEmail"></p>
@@ -695,8 +745,6 @@
          <span
           class="font-inter text-sm font-medium text-[#002735] block group-hover:text-[#00adec] transition-colors">Activity 4</span>
          <span class="font-serif text-xs text-[#7c868a] block mt-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum expedita repudiandae qui corporis molestiae quos adipisci quo iste aliquid saepe, consequatur, error deserunt dolores tempore, assumenda ratione ut neque sed.</span>
-         <!-- <span
-          class="font-inter text-[10px] tracking-widest uppercase text-[#7c868a] block mt-2">Oct 14 · 01:00 PM · Function Room A</span> -->
         </span>
        </label>
       </div>
@@ -728,7 +776,7 @@
   </form>
  </main>
 
- <?php include '../public/includes/footer.php' ?>
+ <?php include __DIR__ . '/includes/footer.php'; ?>
 
  <div
   id="signatureModal"
