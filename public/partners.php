@@ -11,21 +11,24 @@ session_start();
 require __DIR__ . '/api/config.php';
 
 $institutions = [
- ['name' => 'Cordillera Regional Development Council',                       'logo' => 'cordillera.jpg', 'region' => 'CAR'],
- ['name' => 'Regional Development Council Region I',                         'logo' => 'region1.jpg',    'region' => 'Region I'],
- ['name' => 'Regional Development Council Region II',                        'logo' => 'region2.png',    'region' => 'Region II'],
- ['name' => 'Regional Development Council Region V (Bicol)',                 'logo' => 'region5.jpg',    'region' => 'Region V'],
- ['name' => 'Regional Development Council Region VI',                        'logo' => 'region6.jpg',    'region' => 'Region VI'],
- ['name' => 'Regional Development Council Region VII',                       'logo' => 'region7.jpg',    'region' => 'Region VII'],
- ['name' => 'Regional Development Council Region VIII',                      'logo' => 'region8.jpg',    'region' => 'Region VIII'],
- ['name' => 'Regional Development Council Region IX',                        'logo' => 'region9.jpg',    'region' => 'Region IX'],
- ['name' => 'Regional Development Council Region X',                         'logo' => 'region10.png',   'region' => 'Region X'],
- ['name' => 'Regional Development Council Region XI',                        'logo' => 'region11.jpg',   'region' => 'Region XI'],
- ['name' => 'Regional Development Council Region XII (SOCCSKSARGEN)',        'logo' => 'region12.jpg',   'region' => 'Region XII'],
- ['name' => 'Regional Development Council Caraga',                           'logo' => 'region13.png',   'region' => 'Region XIII'],
- ['name' => 'MIMAROPA Regional Development Council',                         'logo' => 'mimaropa.jpg',   'region' => 'MIMAROPA'],
- ['name' => 'Negros Island Region Development Council',                      'logo' => 'nir.png',        'region' => 'NIR'],
-];
+ ['name' => 'Philippine Agriculture and Resources Research Foundation, Inc.',                       'logo' => 'PARRFI.png', 'region' => 'PARRFI'],
+ ['name' => 'Department of Economy, Planning, and Development',                         'logo' => 'DEPDEV.jpg',    'region' => 'DEPDEV '],
+ ['name' => 'Commision on Higher Education',                        'logo' => 'CHED.jpg',    'region' => 'CHED'],
+ ['name' => 'Philippine Statistics Authority',                 'logo' => 'PSA.jpg',    'region' => 'PSA'],
+ ['name' => 'Department of Education',                        'logo' => 'DEPED.png',    'region' => 'DEPED'],
+ ['name' => 'Department of Information and Communications Technology',                       'logo' => 'DICT.jpg',    'region' => 'DICT'],
+ ['name' => 'Department of Trade and Industry',                      'logo' => 'DTI.png',    'region' => 'DTI'],
+ ['name' => 'Health Research and Development Consortium - Calabarzon  ',                        'logo' => 'HRDCC.jpg',    'region' => 'HRDCC'],
+ ['name' => 'Southern Tagalog Agriculture, Aquatic, and Resources Research, Development, and Extension Consortium',                         'logo' => 'STAARDEC.jpg',   'region' => 'STAARDEC'],
+ ['name' => 'Batangas State University',                        'logo' => 'BATSU.jpg',   'region' => 'BATSU'],
+ ['name' => 'Cavite State University',        'logo' => 'CVSU.jpg',   'region' => 'CVSU'],
+ ['name' => 'Laguna State Polytechnic University',                           'logo' => 'LSPU.jpg',   'region' => 'LSPU'],
+ ['name' => 'Southern Luzon State University',                         'logo' => 'SLSU.png',   'region' => 'SLSu'],
+ ['name' => 'University of Rizal System',                      'logo' => 'URS.jpg',        'region' => 'URS'],
+ ['name' => 'University of the Philippines Los Baños',                      'logo' => 'UPLB.jpg',        'region' => 'UPLB'],
+ ['name' => 'Manuel S. Enverga University Foundation',                      'logo' => 'MSEUF.jpg',        'region' => 'MSEUF'],
+
+ ];
 ?>
 <!doctype html>
 <html class="scroll-smooth" lang="en">
